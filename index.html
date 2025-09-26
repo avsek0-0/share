@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>श्री Price Code</title>
+  <meta name="theme-color" content="#0b57d0">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <meta name="description" content="Encode/decode prices (Base‑36 + checksum). QR generate & scan. Offline-ready.">
+</head>
+<body>
+  <header>
+    <div class="app-title">श्री Price Code</div>
+    <button id="installBtn" class="secondary" hidden>Install</button>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Encode (Price → Code)</h2>
+      <div class="grid">
+        <label for="priceInput">Price</label>
+        <input id="priceInput" type="text" inputmode="decimal" placeholder="e.g., 1249.50" />
+
+        <label for="codeOut">Code</label>
+        <div class="row">
+          <input id="codeOut" type="text" readonly>
+          <button id="copyCode" class="secondary">Copy</button>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="encodeBtn" class="primary">Encode</button>
+        <button id="clearEncode" class="secondary">Clear</button>
+        <button id="genQR" class="secondary">Generate QR</button>
+        <a id="downloadQR" class="secondary" download="code-qr.png" hidden>Download QR</a>
+      </div>
+      <canvas id="qrCanvas" width="256" height="256" class="qr" hidden></canvas>
+      <output id="encMsg" class="msg"></output>
+    </section>
+
+    <section class="card">
+      <h2>Decode (Code → Price)</h2>
+      <div class="grid">
+        <label for="codeInput">Code</label>
+        <input id="codeInput" type="text" placeholder="e.g., 2U9F29">
+
+        <label for="priceOut">Price</label>
+        <div class="row">
+          <input id="priceOut" type="text" readonly>
+          <button id="copyPrice" class="secondary">Copy</button>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="decodeBtn" class="primary">Decode</button>
+        <button id="clearDecode" class="secondary">Clear</button>
+        <button id="scanQR" class="secondary">Scan QR</button>
+        <button id="stopScan" class="secondary" hidden>Stop</button>
+      </div>
+
+      <div id="scanWrap" class="scan-wrap" hidden>
+        <video id="video" playsinline></video>
+        <canvas id="scanCanvas" hidden></canvas>
+        <div id="scanHint" class="hint">Point camera at QR…</div>
+      </div>
+
+      <output id="decMsg" class="msg"></output>
+    </section>
+  </main>
+
+  <footer>
+    <small>Offline • QR generate & scan • © You</small>
+  </footer>
+
+  <!-- Prefer local vendor copies (no CDN needed) -->
+  <script src="./vendor/qrcode.min.js"></script>
+  <script src="./vendor/jsQR.js"></script>
+
+  <script src="./app.js"></script>
+</body>
+</html>
